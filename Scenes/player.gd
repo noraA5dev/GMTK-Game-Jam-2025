@@ -23,6 +23,5 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
-	
 
 	move_and_slide()
