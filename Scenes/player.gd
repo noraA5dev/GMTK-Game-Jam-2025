@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 const MAX_SPEED = 300.0
 const JUMP_VELOCITY = -300.0
-var SPEED = 000
+var SPEED = 0
 var ACCELERATION = 500
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
