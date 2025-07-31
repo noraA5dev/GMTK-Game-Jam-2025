@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://dwb4pgciirroi"]
+[gd_scene load_steps=7 format=4 uid="uid://dwb4pgciirroi"]
 
 [ext_resource type="PackedScene" uid="uid://dr06xrus2a3tb" path="res://Scenes/player.tscn" id="1_go701"]
 [ext_resource type="Texture2D" uid="uid://ckjiaxxc8p6qn" path="res://Assets/sprites/world_tileset.png" id="3_5a7ea"]
@@ -210,6 +210,9 @@ texture = ExtResource("3_5a7ea")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_8j60k")
 
+[sub_resource type="LabelSettings" id="LabelSettings_5a7ea"]
+font_size = 10
+
 [node name="World" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -225,6 +228,14 @@ limit_left = -128
 limit_top = -228
 limit_bottom = 120
 position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="Label" type="Label" parent="Player/Camera2D"]
+offset_left = 6.0
+offset_top = -34.0
+offset_right = 46.0
+offset_bottom = -11.0
+label_settings = SubResource("LabelSettings_5a7ea")
 
 [node name="Death Plane" parent="." instance=ExtResource("3_8j60k")]
 position = Vector2(0, 128)

@@ -7,6 +7,8 @@ const MAX_SPEED = 300.0
 const JUMP_VELOCITY = -300.0
 var SPEED = 0
 var ACCELERATION = 500
+var lastX = 0
+var lastY = 0
 @onready var death_plane: Area2D = $"../Death Plane"
 
 func _ready() -> void:
@@ -14,8 +16,7 @@ func _ready() -> void:
 	#print(death_plane.global_position)
 	pass
 func _physics_process(delta: float) -> void:
-	#if self.global_position == Vector2(self.global_position.x, -32):
-		#death()
+	var did_move = (lastX == position.x) and (lastY == position.y)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -24,17 +25,23 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
+	$Camera2D/Label.text = "velocity: " + str(velocity) + "\n SPEED: " + str(SPEED)
+
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# As good practice, yodu should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	if direction: # Adjust the threshold (0.1) as needed:
-		SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
+		if did_move:
+			SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
+		
 
 	move_and_slide()
+	lastX = position.x
+	lastY = position.y
 func death():
 	anim.play("Death")
 	print(r"¯\_(ツ)_/¯")
