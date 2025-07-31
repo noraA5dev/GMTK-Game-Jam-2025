@@ -228,7 +228,6 @@ limit_left = -128
 limit_top = -228
 limit_bottom = 120
 position_smoothing_enabled = true
-position_smoothing_speed = 1.0
 
 [node name="Label" type="Label" parent="Player/Camera2D"]
 offset_left = 6.0
