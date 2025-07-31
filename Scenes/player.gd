@@ -8,6 +8,8 @@ const JUMP_VELOCITY = -300.0
 var SPEED = 0
 var ACCELERATION = 500
 func _physics_process(delta: float) -> void:
+	#if self.global_position == Vector2(self.global_position.x, -32):
+		#death()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -15,18 +17,19 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		death()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
-	if direction:
+	if direction and not velocity.length() < 0.1: # Adjust the threshold (0.1) as needed:
 		SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
+		print(SPEED)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
 
 	move_and_slide()
 func death():
-	print(r"¯\_(ツ)_/¯")
+	anim.play("Death")
+	print("Test")
