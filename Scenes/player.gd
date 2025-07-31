@@ -9,6 +9,12 @@ var SPEED = 0
 var ACCELERATION = 500
 var lastX = 0
 var lastY = 0
+@onready var death_plane: Area2D = $"../Death Plane"
+
+func _ready() -> void:
+	#GlobalSignals.fall_to_death.connect(on_fall_to_death)
+	#print(death_plane.global_position)
+	pass
 func _physics_process(delta: float) -> void:
 	var did_move = (lastX == position.x) and (lastY == position.y)
 	# Add the gravity.
@@ -38,4 +44,9 @@ func _physics_process(delta: float) -> void:
 	lastY = position.y
 func death():
 	anim.play("Death")
-	print("Test")
+	print(r"¯\_(ツ)_/¯")
+	get_tree().reload_current_scene()
+
+
+func _on_death_plane_body_entered(body: Node2D) -> void:
+	death()

@@ -237,3 +237,5 @@ label_settings = SubResource("LabelSettings_5a7ea")
 
 [node name="Death Plane" parent="." instance=ExtResource("3_8j60k")]
 position = Vector2(0, 128)
+
+[connection signal="body_entered" from="Death Plane" to="Player" method="_on_death_plane_body_entered"]
