@@ -7,6 +7,12 @@ const MAX_SPEED = 300.0
 const JUMP_VELOCITY = -300.0
 var SPEED = 0
 var ACCELERATION = 500
+@onready var death_plane: Area2D = $"../Death Plane"
+
+func _ready() -> void:
+	#GlobalSignals.fall_to_death.connect(on_fall_to_death)
+	#print(death_plane.global_position)
+	pass
 func _physics_process(delta: float) -> void:
 	#if self.global_position == Vector2(self.global_position.x, -32):
 		#death()
@@ -31,4 +37,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 func death():
 	anim.play("Death")
-	print("Test")
+	print(r"¯\_(ツ)_/¯")
+	get_tree().reload_current_scene()
+
+
+func _on_death_plane_body_entered(body: Node2D) -> void:
+	death()

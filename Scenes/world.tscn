@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dr06xrus2a3tb" path="res://Scenes/player.tscn" id="1_go701"]
 [ext_resource type="Texture2D" uid="uid://ckjiaxxc8p6qn" path="res://Assets/sprites/world_tileset.png" id="3_5a7ea"]
-[ext_resource type="PackedScene" path="res://Scenes/death_plane.tscn" id="3_8j60k"]
+[ext_resource type="PackedScene" uid="uid://b7eq0net3g2v6" path="res://Scenes/death_plane.tscn" id="3_8j60k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8j60k"]
 texture = ExtResource("3_5a7ea")
@@ -194,11 +194,17 @@ texture = ExtResource("3_5a7ea")
 11:6/0 = 0
 12:6/0 = 0
 15:3/0 = 0
+15:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:2/0 = 0
+15:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:0/0 = 0
+15:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:1/0 = 0
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:1/0 = 0
+13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:1/0 = 0
+14:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_fo5ed"]
 physics_layer_0/collision_layer = 1
@@ -220,3 +226,5 @@ position_smoothing_enabled = true
 
 [node name="Death Plane" parent="." instance=ExtResource("3_8j60k")]
 position = Vector2(0, 128)
+
+[connection signal="body_entered" from="Death Plane" to="Player" method="_on_death_plane_body_entered"]
