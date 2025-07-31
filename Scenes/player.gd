@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	lastY = position.y
 func death():
 	anim.play("Death")
-	print(r"¯\_(ツ)_/¯")
+	print(r"¯\_(ツ)_/¯\n\nYou ded")
 	get_tree().reload_current_scene()
 
 
