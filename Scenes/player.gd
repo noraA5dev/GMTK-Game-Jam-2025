@@ -21,10 +21,9 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
-	if direction and not velocity.length() < 0.1: # Adjust the threshold (0.1) as needed:
+	if direction: # Adjust the threshold (0.1) as needed:
 		SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
-		print(SPEED)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
