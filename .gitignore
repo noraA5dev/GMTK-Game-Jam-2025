@@ -4,3 +4,4 @@
 addons/
 export_presets.cfg
 export/
+*.swp
