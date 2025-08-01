@@ -63,13 +63,13 @@ func death():
 	print(r"¯\_(ツ)_/¯ You ded")
 	get_tree().reload_current_scene()
 
-func _on_death_plane_body_entered(body: CharacterBody2D) -> void:
+func _on_death_plane_body_entered(_body: CharacterBody2D) -> void:
 	death()
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_area_2d_body_exited(_body: Node2D) -> void:
 	on_ladder = false
 	pass # Replace with function body.
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	on_ladder = true
 	pass # Replace with function body.
