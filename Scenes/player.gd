@@ -18,7 +18,7 @@ func _ready() -> void:
 	#print(death_plane.global_position)
 	pass
 
-func flip():
+func flip(direction):
 	if direction == -1:
 		return true
 	else:
@@ -26,11 +26,11 @@ func flip():
 
 func _physics_process(delta: float) -> void:
 	var did_move = (lastX == position.x) and (lastY == position.y)
+	var direction := Input.get_axis("left", "right")
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	$AnimatedSprite2D.flip_h = bool(flip())
+	
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -40,6 +40,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	$Camera2D/Label.text = "velocity: " + str(velocity) + "\n SPEED: " + str(SPEED) + "\ndirection: " + str(direction)
 	if direction: # Adjust the threshold (0.1) as needed:
+		$AnimatedSprite2D.flip_h = flip(direction)
 		if did_move:
 			SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
