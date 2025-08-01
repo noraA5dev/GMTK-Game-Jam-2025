@@ -3,19 +3,17 @@ extends CharacterBody2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_plane: Area2D = $"../Death Plane"
 
-
 @export var MAX_SPEED := 300
 @export var JUMP_VELOCITY := -350
+
 var SPEED = 0
 var ACCELERATION = 500
+var CLIMB_SPEED = 200.0
 var lastX = 0
 var lastY = 0
-var on_ladder: bool
+var on_ladder = false
 var climbing: bool
-
 func _ready() -> void:
-	#GlobalSignals.fall_to_death.connect(on_fall_to_death)
-	#print(death_plane.global_position)
 	pass
 
 func flip(direction):
@@ -30,7 +28,16 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
+
+	if on_ladder:
+		var vert_direction := Input.get_axis("up" ,"down")
+		if vert_direction:
+			velocity.y = vert_direction * CLIMB_SPEED
+			climbing = not is_on_floor()
+		else:
+			velocity.y = move_toward(velocity.y, 0, CLIMB_SPEED)
+			if is_on_floor(): climbing = false
+		
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -41,23 +48,27 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2(0, 0)
 		death()
 	# Get the input direction and handle the movement/deceleration.
-	$Camera2D/Label.text = "velocity: " + str(velocity) + "\n SPEED: " + str(SPEED) + "\ndirection: " + str(direction)
+	$Camera2D/Label.text = "on ladder: " + str(on_ladder) + "\ndirection: " + str(direction)
 	if direction: # Adjust the threshold (0.1) as needed:
 		$AnimatedSprite2D.flip_h = flip(direction)
 		if did_move:
 			SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
+		if on_ladder: climbing = not is_on_floor()
+		else: climbing = false
+		anim.pause()
+		anim.play("Walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
-		
-
+		anim.pause()
+		anim.play("Idle")
 	move_and_slide()
-
-	#detection for if the player has moved
-	lastX = position.x
 	lastY = position.y
-
+	lastX = position.x
+	print(on_ladder)
+	if Input.is_action_just_pressed("quit"): get_tree().quit()
+	
 func death():
 	anim.play("Death")
 	print(r"¯\_(ツ)_/¯ You ded")
@@ -67,9 +78,9 @@ func _on_death_plane_body_entered(_body: CharacterBody2D) -> void:
 	death()
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
+	print("exited a ladder")
 	on_ladder = false
-	pass # Replace with function body.
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
+	print("entered a ladder")
 	on_ladder = true
-	pass # Replace with function body.
