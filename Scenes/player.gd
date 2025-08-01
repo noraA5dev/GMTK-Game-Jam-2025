@@ -1,17 +1,17 @@
 extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_plane: Area2D = $"../Death Plane"
 
 
-const MAX_SPEED = 300.0
-const JUMP_VELOCITY = -350.0
+@export var MAX_SPEED := 300
+@export var JUMP_VELOCITY := -350
 var SPEED = 0
 var ACCELERATION = 500
 var lastX = 0
 var lastY = 0
-var direction := Input.get_axis("left", "right")
-
-@onready var death_plane: Area2D = $"../Death Plane"
+var on_ladder: bool
+var climbing: bool
 
 func _ready() -> void:
 	#GlobalSignals.fall_to_death.connect(on_fall_to_death)
@@ -63,6 +63,13 @@ func death():
 	print(r"¯\_(ツ)_/¯ You ded")
 	get_tree().reload_current_scene()
 
-
 func _on_death_plane_body_entered(body: CharacterBody2D) -> void:
 	death()
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	on_ladder = false
+	pass # Replace with function body.
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	on_ladder = true
+	pass # Replace with function body.
