@@ -38,7 +38,6 @@ func _physics_process(delta: float) -> void:
 
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	$Camera2D/Label.text = "velocity: " + str(velocity) + "\n SPEED: " + str(SPEED) + "\ndirection: " + str(direction)
 	if direction: # Adjust the threshold (0.1) as needed:
 		if did_move:
@@ -50,8 +49,11 @@ func _physics_process(delta: float) -> void:
 		
 
 	move_and_slide()
+
+	#detection for if the player has moved
 	lastX = position.x
 	lastY = position.y
+
 func death():
 	anim.play("Death")
 	print(r"¯\_(ツ)_/¯ You ded")
