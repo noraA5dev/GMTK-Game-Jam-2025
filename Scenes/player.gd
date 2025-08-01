@@ -66,7 +66,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	lastY = position.y
 	lastX = position.x
-	print(on_ladder)
 	if Input.is_action_just_pressed("quit"): get_tree().quit()
 	
 func death():
