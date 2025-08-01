@@ -44,9 +44,11 @@ func _physics_process(delta: float) -> void:
 		if did_move:
 			SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
+		print("The player did move")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
+		print("The player did not move")
 		
 
 	move_and_slide()
