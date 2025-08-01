@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 
 const MAX_SPEED = 300.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -350.0
 var SPEED = 0
 var ACCELERATION = 500
 var lastX = 0
@@ -36,7 +36,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-
+	# Handles respawn/ restart
+	if Input.is_action_just_pressed("restart"):
+		velocity = Vector2(0, 0)
+		death()
 	# Get the input direction and handle the movement/deceleration.
 	$Camera2D/Label.text = "velocity: " + str(velocity) + "\n SPEED: " + str(SPEED) + "\ndirection: " + str(direction)
 	if direction: # Adjust the threshold (0.1) as needed:
