@@ -22,7 +22,7 @@ texture = ExtResource("3_5a7ea")
 6:0/0 = 0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:0/0 = 0
-7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32.0149, -7.91378, 31.968, -7.97101, 32.0519, 7.97101, -31.835, 7.73392)
 8:0/0 = 0
 8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
@@ -235,7 +235,8 @@ texture = ExtResource("3_5a7ea")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ukr8"]
 texture = ExtResource("3_fo5ed")
-texture_region_size = Vector2i(64, 16)
+margins = Vector2i(0, 16)
+texture_region_size = Vector2i(80, 16)
 0:0/animation_columns = 8
 0:0/animation_speed = 6.0
 0:0/animation_frame_0/duration = 1.0

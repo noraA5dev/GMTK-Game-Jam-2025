@@ -47,11 +47,9 @@ func _physics_process(delta: float) -> void:
 		if did_move:
 			SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
 		velocity.x = direction * SPEED
-		print("The player did move")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
-		print("The player did not move")
 		
 
 	move_and_slide()
@@ -66,5 +64,5 @@ func death():
 	get_tree().reload_current_scene()
 
 
-func _on_death_plane_body_entered(body: Node2D) -> void:
+func _on_death_plane_body_entered(body: CharacterBody2D) -> void:
 	death()
