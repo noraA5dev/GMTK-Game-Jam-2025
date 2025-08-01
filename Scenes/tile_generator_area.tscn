@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfqtg3bb5lyp1"]
+
+[ext_resource type="Script" uid="uid://dl718futavlwd" path="res://Scenes/tile_generator_area.gd" id="1_u88tc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o0ww3"]
+
+[node name="Tile_Generator_Area" type="Marker2D"]
+script = ExtResource("1_u88tc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_o0ww3")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
