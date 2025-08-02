@@ -13,6 +13,8 @@ var lastX = 0
 var lastY = 0
 var on_ladder = false
 var climbing: bool
+var game_paused = false
+var animation_finished = null
 func _ready() -> void:
 	pass
 
@@ -26,11 +28,11 @@ func _physics_process(delta: float) -> void:
 	var did_move = (lastX == position.x) and (lastY == position.y)
 	var direction := Input.get_axis("left", "right")
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and not game_paused:
 		velocity += get_gravity() * delta
 
 	if on_ladder:
-		var vert_direction := Input.get_axis("up" ,"down")
+		var vert_direction := Input.get_axis("jump" ,"down")
 		if vert_direction:
 			velocity.y = vert_direction * CLIMB_SPEED
 			climbing = not is_on_floor()
@@ -46,12 +48,12 @@ func _physics_process(delta: float) -> void:
 	# Handles respawn/ restart
 	if Input.is_action_just_pressed("restart"):
 		velocity = Vector2(0, 0)
-		death()
+		death('respawn')
 
 	# Get the input direction and handle the movement/deceleration.
-	$Camera2D/Label.text = "on ladder: " + str(on_ladder) + "\ndirection: " + str(direction)
+	$Camera2D/Label.text = "on ladder: " + str(on_ladder) + "\ndirection: " + str(direction) + "\nanimation finished: " + str(animation_finished)
 	
-	if direction: # Adjust the threshold (0.1) as needed:
+	if direction and not game_paused: # Adjust the threshold (0.1) as needed:
 		$AnimatedSprite2D.flip_h = flip(direction)
 		
 		if did_move:
@@ -61,34 +63,43 @@ func _physics_process(delta: float) -> void:
 		
 		if on_ladder: climbing = not is_on_floor()
 		else: climbing = false
-		
-		anim.pause()
-		anim.play("Walk")
+		if not game_paused:
+			anim.pause()
+			anim.play("Walk")
 		
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if not game_paused: velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
-		anim.pause()
-		anim.play("Idle")
-		
-	move_and_slide()
+		if not game_paused:
+			anim.pause()
+			anim.play("Idle")
+	
+	if not game_paused: move_and_slide()
 	lastY = position.y
 	lastX = position.x
 	if Input.is_action_just_pressed("quit"): get_tree().quit()
+	if Input.is_action_just_pressed("custom"): anim.pause()
+func death(death_message):
+	print(r"Died to " + str(death_message) + " :(")
 	
-func death():
-	anim.play("Death")
-	print(r"¯\_(ツ)_/¯ You ded")
+	if death_message == "void":
+		await get_tree().create_timer(0.75).timeout
+
+	elif death_message == "lava":
+		anim.pause()
+		anim.play("Death")
+		
+		game_paused = true
+		await get_tree().create_timer(1.25).timeout
 	get_tree().reload_current_scene()
 
 func _on_death_plane_body_entered(_body: CharacterBody2D) -> void:
-	death()
+	death("void")
 
 # Lava func
 
 func _entered_lava(_body: Node2D) -> void:
-	print("entered lava")
-	pass # Replace with function body.
+	death("lava")
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
 	print("exited a ladder")
@@ -97,3 +108,7 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 func _on_area_2d_body_entered(_body: Node2D) -> void:
 	print("entered a ladder")
 	on_ladder = true
+
+func _on_animated_sprite_2d_animation_finished(anim_name) -> void:
+	print("finished animation")
+	animation_finished = anim_name
