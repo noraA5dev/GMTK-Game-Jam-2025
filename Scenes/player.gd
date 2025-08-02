@@ -47,22 +47,30 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
 		velocity = Vector2(0, 0)
 		death()
+
 	# Get the input direction and handle the movement/deceleration.
 	$Camera2D/Label.text = "on ladder: " + str(on_ladder) + "\ndirection: " + str(direction)
+	
 	if direction: # Adjust the threshold (0.1) as needed:
 		$AnimatedSprite2D.flip_h = flip(direction)
+		
 		if did_move:
 			SPEED = min(SPEED + ACCELERATION * delta, MAX_SPEED)
+			
 		velocity.x = direction * SPEED
+		
 		if on_ladder: climbing = not is_on_floor()
 		else: climbing = false
+		
 		anim.pause()
 		anim.play("Walk")
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		SPEED = 0
 		anim.pause()
 		anim.play("Idle")
+		
 	move_and_slide()
 	lastY = position.y
 	lastX = position.x
@@ -75,6 +83,12 @@ func death():
 
 func _on_death_plane_body_entered(_body: CharacterBody2D) -> void:
 	death()
+
+# Lava func
+
+func _entered_lava(_body: Node2D) -> void:
+	print("entered lava")
+	pass # Replace with function body.
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
 	print("exited a ladder")
