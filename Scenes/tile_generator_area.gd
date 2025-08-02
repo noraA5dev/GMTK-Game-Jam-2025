@@ -24,8 +24,6 @@ func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
 	current_instanced_tile = world_node.get_child(-1)
 	var test = get_tree().root.get_node("res://Maps/map_2.gd")
 	print(test)
-	#Tile_Spacing_X = test.tile_spacing_x * 8
-	#Tile_Spacing_Y = test.tile_spacing_y * 8
-	current_instanced_tile.global_position = Vector2(self.global_position.x + Tile_Spacing_X, self.global_position.y+ Tile_Spacing_Y)
-	#self.global_position = Vector2(current_instanced_tile.global_position.x, current_instanced_tile.global_position.y)
-	self.global_position.x = current_instanced_tile.global_position.x
+	Tile_Spacing_X = test.tile_spacing_x * 8
+	current_instanced_tile.global_position = Vector2(self.global_position.x + Tile_Spacing_X, self.global_position.y)
+	self.global_position = Vector2(current_instanced_tile.global_position.x, current_instanced_tile.global_position.y)

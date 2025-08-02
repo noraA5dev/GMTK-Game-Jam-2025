@@ -256,7 +256,7 @@ texture_region_size = Vector2i(80, 16)
 0:0/animation_frame_6/duration = 1.0
 0:0/animation_frame_7/duration = 1.0
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -8, 40, -8, 40, 8, -24, 8)
 
 [sub_resource type="TileSet" id="TileSet_bar53"]
 physics_layer_0/collision_layer = 1
