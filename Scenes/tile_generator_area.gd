@@ -1,6 +1,6 @@
 extends Marker2D
 
-const _5_WIDE = preload("res://Maps/map_2.tscn")
+const _5_WIDE = preload("res://Maps/5_wide.tscn")
 @onready var world_node: Node2D = $".."
 
 var current_instanced_tile: Marker2D = null
@@ -18,11 +18,12 @@ func _process(_delta: float) -> void:
 
 func get_next_tile():
 	return _5_WIDE
-func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
+func _on_area_2d_body_entered(body: CharacterBody2D) -> void:
+	print("Test")
 	current_tile = get_next_tile().instantiate()
 	world_node.add_child(current_tile)
 	current_instanced_tile = world_node.get_child(-1)
-	var test = get_tree().root.get_node("res://Maps/map_2.gd")
+	var test = get_tree().root.get_node("World/5 Wide")
 	print(test)
 	Tile_Spacing_X = test.tile_spacing_x * 8
 	current_instanced_tile.global_position = Vector2(self.global_position.x + Tile_Spacing_X, self.global_position.y)
