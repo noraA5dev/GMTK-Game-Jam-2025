@@ -291,7 +291,7 @@ script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qpa8y")
-animation = &"Walk"
+animation = &"Idle"
 speed_scale = 1.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -320,6 +320,7 @@ visibility_layer = 2
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_cvnsp")
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="LavaArea2d" to="." method="_entered_lava"]
