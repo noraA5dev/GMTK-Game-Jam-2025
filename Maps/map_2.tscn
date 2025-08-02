@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://dhqqdru53l5lm"]
+[gd_scene load_steps=7 format=4 uid="uid://dhqqdru53l5lm"]
 
+[ext_resource type="Script" uid="uid://gl81a55cjj44" path="res://Maps/map_2.gd" id="1_1c7ga"]
 [ext_resource type="Texture2D" uid="uid://ckjiaxxc8p6qn" path="res://Assets/sprites/world_tileset.png" id="1_xul5x"]
 [ext_resource type="Texture2D" uid="uid://c8vssufbnn0tm" path="res://Assets/sprites/Lava_animation.png" id="2_1c7ga"]
 
@@ -266,6 +267,7 @@ sources/0 = SubResource("TileSetAtlasSource_dnqgm")
 sources/3 = SubResource("TileSetAtlasSource_aeq0j")
 
 [node name="map_2" type="Marker2D"]
+script = ExtResource("1_1c7ga")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAAAAAAJAAkAAAABAAAAAAAKAAkAAAACAAAAAAAKAAkAAAADAAAAAAAKAAkAAAAEAAAAAAAKAAkAAAAFAAAAAAAKAAkAAAAGAAAAAAAKAAkAAAAHAAAAAAAKAAkAAAAIAAAAAAAKAAkAAAAJAAAAAAAKAAkAAAAKAAAAAAAKAAkAAAALAAAAAAAKAAkAAAAMAAAAAAAKAAkAAAANAAAAAAAKAAkAAAAOAAAAAAAKAAkAAAAPAAAAAAAKAAkAAAAQAAAAAAAKAAkAAAARAAAAAAAKAAkAAAASAAAAAAALAAkAAAA=")
