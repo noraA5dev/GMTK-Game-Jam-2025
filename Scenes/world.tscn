@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dr06xrus2a3tb" path="res://Scenes/player.tscn" id="1_go701"]
 [ext_resource type="PackedScene" uid="uid://b7eq0net3g2v6" path="res://Scenes/death_plane.tscn" id="3_8j60k"]
 [ext_resource type="TileSet" uid="uid://ccy3nycvu44nj" path="res://Assets/TileSets/world_tileset.tres" id="3_fo5ed"]
-[ext_resource type="PackedScene" uid="uid://bcfyxstdd4luc" path="res://Scenes/tile_generator_area.tscn" id="6_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://dfqtg3bb5lyp1" path="res://Scenes/tile_generator_area.tscn" id="6_5ukr8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5a7ea"]
 font_size = 10
