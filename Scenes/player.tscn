@@ -280,7 +280,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
@@ -291,7 +291,7 @@ script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qpa8y")
-animation = &"Idle"
+animation = &"Walk"
 speed_scale = 1.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
