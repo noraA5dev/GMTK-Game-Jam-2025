@@ -5,8 +5,8 @@ const _5_WIDE = preload("res://Maps/5_wide.tscn")
 
 var current_instanced_tile: Marker2D = null
 var current_tile: Marker2D = null
-var Tile_Spacing_X: int = 0
-var Tile_Spacing_Y: int = 0
+var Tile_Spacing_X: int = 50
+var Tile_Spacing_Y: int = 16
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
