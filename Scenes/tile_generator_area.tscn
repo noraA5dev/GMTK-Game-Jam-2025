@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcfyxstdd4luc"]
+[gd_scene load_steps=3 format=3 uid="uid://dfqtg3bb5lyp1"]
 
 [ext_resource type="Script" uid="uid://dl718futavlwd" path="res://Scenes/tile_generator_area.gd" id="1_u88tc"]
 
