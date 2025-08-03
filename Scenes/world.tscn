@@ -40,6 +40,7 @@ limit_top = -228
 limit_bottom = 120
 
 [node name="Label" type="Label" parent="Player/Camera2D"]
+visible = false
 clip_contents = true
 offset_left = 6.0
 offset_top = -34.0
