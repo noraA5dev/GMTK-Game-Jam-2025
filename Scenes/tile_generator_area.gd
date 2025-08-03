@@ -4,7 +4,8 @@ extends Marker2D
 @onready var map_num: int = $".".map_number
 var maps = {1: preload("res://Maps/5_wide.tscn"),
 			2: preload("res://Maps/map_2.tscn"),
-			3: preload("res://Maps/map_3.tscn")}
+			3: preload("res://Maps/map_3.tscn"),
+			4: preload("res://Maps/map_4.tscn")}
 var current_instanced_tile: Marker2D = null
 var current_tile: Marker2D = null
 var Tile_Spacing_X: int = 0
