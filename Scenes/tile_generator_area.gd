@@ -40,7 +40,6 @@ func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
 	print(current_tile)
 	print(current_instanced_tile)
 	Tile_Spacing_X = current_instanced_tile.tile_spacing_x * 8 
-	print(Tile_Spacing_X, ", ", Tile_Spacing_Y)
 	
 	Tile_Spacing_X = current_instanced_tile.tile_spacing_x * 8 
 	print(Tile_Spacing_X)
