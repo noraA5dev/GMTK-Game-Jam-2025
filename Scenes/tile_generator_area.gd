@@ -8,7 +8,6 @@ var maps = {1: preload("res://Maps/5_wide.tscn"),
 var current_instanced_tile: Marker2D = null
 var current_tile: Marker2D = null
 var Tile_Spacing_X: int = 0
-var Tile_Spacing_Y: int = 0
 @export var map_number = 2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +27,7 @@ func get_next_tile():
 	return random_value
 
 func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
+	
 	print(get_next_tile())
 	#print(maps)
 	#print(map_num)
@@ -41,6 +41,9 @@ func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
 	print(current_instanced_tile)
 	Tile_Spacing_X = current_instanced_tile.tile_spacing_x * 8 
 	print(Tile_Spacing_X, ", ", Tile_Spacing_Y)
+	
+	Tile_Spacing_X = current_instanced_tile.tile_spacing_x * 8 
+	print(Tile_Spacing_X)
 	
 	current_instanced_tile.global_position = Vector2(self.global_position.x + Tile_Spacing_X, self.global_position.y)
 	self.global_position = Vector2(current_instanced_tile.global_position.x, current_instanced_tile.global_position.y)
