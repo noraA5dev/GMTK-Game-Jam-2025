@@ -27,6 +27,7 @@ func get_next_tile():
 
 func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
 	
+	print(get_next_tile())
 	#print(maps)
 	#print(map_num)
 	current_tile = get_next_tile().instantiate()
@@ -41,6 +42,8 @@ func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
 	# debug
 	print(current_tile)
 	print(current_instanced_tile)
+	Tile_Spacing_X = current_instanced_tile.tile_spacing_x * 8 
+	print(Tile_Spacing_X, ", ", Tile_Spacing_Y)
 	
 	Tile_Spacing_X = current_instanced_tile.tile_spacing_x * 8 
 	print(Tile_Spacing_X)
