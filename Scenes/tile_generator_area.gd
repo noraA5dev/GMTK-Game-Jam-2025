@@ -3,7 +3,8 @@ extends Marker2D
 @onready var world_node: Node2D = $".."
 @onready var map_num: int = $".".map_number
 var maps = {1: preload("res://Maps/5_wide.tscn"),
-			2: preload("res://Maps/map_2.tscn")}
+			2: preload("res://Maps/map_2.tscn"),
+			3: preload("res://Maps/map_3.tscn")}
 var current_instanced_tile: Marker2D = null
 var current_tile: Marker2D = null
 var Tile_Spacing_X: int = 0
@@ -34,10 +35,6 @@ func _on_area_2d_body_entered(_body: CharacterBody2D) -> void:
 	world_node.add_child(current_tile)
 	current_instanced_tile = world_node.get_child(-1)
 	
-	
-	#maps[map_num]["node"] = get_tree().root.get_node(maps[map_num]["node_tree"])
-	#var test = maps[map_num]["node"]
-	#print(test)
 	
 	# debug
 	print(current_tile)
