@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var MAX_SPEED := 300
 @export var JUMP_VELOCITY := -350
 
+
+
 var SPEED = 0
 var ACCELERATION = 500
 var CLIMB_SPEED = 200.0
@@ -15,6 +17,8 @@ var on_ladder = false
 var climbing: bool
 var game_paused = false
 var animation_finished = null
+@onready var map_number = $"../Tile_Generator_Area".map_number
+
 func _ready() -> void:
 	pass
 
@@ -51,8 +55,7 @@ func _physics_process(delta: float) -> void:
 		death('respawn')
 
 	# Get the input direction and handle the movement/deceleration.
-	$Camera2D/Label.text = "on ladder: " + str(on_ladder) + "\ndirection: " + str(direction) + "\nanimation finished: " + str(animation_finished)
-	
+	$Camera2D/Label.text = "on ladder: " + str(on_ladder) + "\ndirection: " + str(direction) + "\nmap number: " + str(map_number)
 	if direction and not game_paused: # Adjust the threshold (0.1) as needed:
 		$AnimatedSprite2D.flip_h = flip(direction)
 		
@@ -78,7 +81,11 @@ func _physics_process(delta: float) -> void:
 	lastY = position.y
 	lastX = position.x
 	if Input.is_action_just_pressed("quit"): get_tree().quit()
-	if Input.is_action_just_pressed("custom"): anim.pause()
+	
+	if Input.is_action_just_pressed("custom") and map_number == 1:
+		map_number = 2
+	elif Input.is_action_just_pressed("custom") and map_number == 2:
+		map_number = 1 
 func death(death_message):
 	print(r"Died to " + str(death_message) + " :(")
 	
